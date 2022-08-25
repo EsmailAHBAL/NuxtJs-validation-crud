@@ -15,6 +15,21 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  router: {
+
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'dashb',
+        path: '/dashb',
+        component: resolve(__dirname, 'pages/dash.vue'),
+      }),
+      routes.push({
+        name: 'detail',
+        path: '/detail/:id',
+        component: resolve(__dirname, 'pages/detail.vue'),
+      })
+    }
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

@@ -1,7 +1,15 @@
 <template>
   <div class="container" style="margin-top: 5%;">
     <div class="" style="display: flex;justify-content: space-around;">
-      <strong>Welcome</strong> <button class="button is-danger" @click="logout()">Danger</button>
+      <strong>Welcome</strong>
+       <div>
+        <button class="button is-light">
+          <router-link to="/Post" class="text is-light"> <span>Article</span></router-link>
+        </button>
+
+        <button class="button is-danger" @click="logout()">Danger</button>
+
+      </div>
 
     </div>
     <hr />
@@ -16,7 +24,7 @@
     <form @submit.prevent="addNote()">
       <div class="field">
         <p class="control has-icons-left has-icons-right">
-          <input 
+          <input
           v-model="note.title"
           class="input" type="text" placeholder="Title">
           <span class="icon is-small is-left">
@@ -29,12 +37,12 @@
       </div>
          <div class="field">
         <p class="control has-icons-left has-icons-right">
-          <textarea   
+          <textarea
           class="textarea is-info"
           v-model="note.note">
 
-          </textarea> 
-        
+          </textarea>
+
         </p>
       </div>
       <div>
@@ -44,11 +52,16 @@
     </div>
     <hr/>
     <div>
-        <div class="box" 
+        <div class="box"
         style="display: flex;justify-content: space-between;"
         v-for="note in notes">
-        {{note.title}} 
-          {{note.note}} 
+      <div>
+          {{note.title}}
+        {{note.title}}
+          {{note.title}}
+        <br/>
+          {{note.note}}
+      </div>
 
           <span class="tag is-danger"
           @click="show(note)"
@@ -65,12 +78,27 @@
         title:"",
         note:""
       }
-      ,notes:[]
+      ,notes:[],
+      age:9
     }),
     mounted() {
       this.getData();
+
+    },
+
+
+    beforeRouteEnter(to,f,next){
+     if(process.client){
+      if(!localStorage.user){
+
+               next("/")
+      }
+     }
+
+       next()
     },
     methods: {
+
       getData() {
 
         this.user = JSON.parse(localStorage.getItem("user"));
